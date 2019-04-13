@@ -20,13 +20,16 @@ displayButtons()
 $(document).on("click", ".each-button", function (event) {
     var searchTerm = $(this).text()
     var queryURL = `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=4YH971Skk7dE3erBkplFkZ4bMnUHdza7&limit=10`;
+
     $.ajax({
         url: queryURL,
         method: "GET"
     }).done(function (response) {
         var responsePlusData = response.data
         for (var i = 0; i < responsePlusData.length; i++) {
-            $("#gifDiv").prepend("<img src='" + responsePlusData[i].images.fixed_height.url + "'>");
+            var moving = responsePlusData[i].images.fixed_height.url;
+            var static = responsePlusData[i].images.fixed_height_still.url;
+            $("#gifDiv").prepend("Rating: " + responsePlusData[i].rating + "<img src='" + static + "'>");
         }
     });
 });
@@ -41,3 +44,10 @@ $("#search").on("submit", function (event) {
 
 });
 
+//Need to add to stop and start//
+//ON click static should change to moving
+//var static= responsePlusData[i].images.fixed_height_still.url > var moving
+$(document).on("click", "<img>", function pauseOrPlay() {
+
+
+});
