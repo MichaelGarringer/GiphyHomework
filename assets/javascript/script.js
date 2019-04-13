@@ -3,14 +3,14 @@ var buttons = ["bear", "dog", "cat", "duck"]
 
 
 //Loop through buttons array and create buttons
-function displayButtons(){
+function displayButtons() {
     $("#buttons-container").empty()
     for (var i = 0; i < buttons.length; i++) {
-        var newButton = $("<button> </button>")
+        var newButton = $("<button>")
         newButton.text(buttons[i])
         newButton.addClass("each-button")
         $("#buttons-container").append(newButton)
-    
+
     };
 }
 
@@ -32,13 +32,12 @@ $(document).on("click", ".each-button", function (event) {
 });
 
 //Submit even from search form
-$("#search").on("submit", function(event){
-    event.preventDefault()
+$("#search").on("submit", function (event) {
+    event.preventDefault();
     var newButton = $("#userInput").val().trim();
-    console.log(newButton)
-
-    buttons.push(newButton)
-    displayButtons()
+    console.log(newButton);
+    buttons.push(newButton);
+    displayButtons();
 
 });
 

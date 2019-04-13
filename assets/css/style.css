@@ -1,6 +1,6 @@
 #gifDiv{
     display:grid; 
-    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr;
     grid-gap:30px;
     margin: 0px 30px 0px 30px;
 }
@@ -11,4 +11,14 @@ img{
 }
 h1{
     color:red;
+    text-align:center;
+
+}
+h3{
+    text-align:center;
+}
+.each-button{
+    color:red;
+    text-align:center;
+
 }
