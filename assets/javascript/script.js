@@ -27,9 +27,8 @@ $(document).on("click", ".each-button", function (event) {
     }).done(function (response) {
         var responsePlusData = response.data
         for (var i = 0; i < responsePlusData.length; i++) {
-            
             var newDiv = $("<div>")
-            var rating = responsePlusData.rating
+            var rating = responsePlusData[i].rating;
         	var moving = responsePlusData[i].images.fixed_height.url;
         	var static = responsePlusData[i].images.fixed_height_still.url;
         	var imageTag = $("<img>");
@@ -38,8 +37,7 @@ $(document).on("click", ".each-button", function (event) {
         	imageTag.attr("data-state", "still");
         	imageTag.attr("data-still",static );
         	imageTag.attr("data-animate", moving);
-        
-            newDiv.append("Rating: " + rating)
+            newDiv.append("Rating: " + rating);
             newDiv.append(imageTag);
         	$("#gifDiv").prepend(newDiv);
         }
