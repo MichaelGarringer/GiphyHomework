@@ -30,6 +30,13 @@ $(document).on("click", ".each-button", function (event) {
             var moving = responsePlusData[i].images.fixed_height.url;
             var static = responsePlusData[i].images.fixed_height_still.url;
             $("#gifDiv").prepend("Rating: " + responsePlusData[i].rating + "<img src='" + static + "'>");
+            var image = $("<img>");
+            image.attr("src", static);
+            image.addClass("gif");
+            image.attr("data-state", "still");
+            image.attr("data-still", static);
+            image.attr("data-animate", moving);
+            ;
         }
     });
 });
@@ -43,11 +50,15 @@ $("#search").on("submit", function (event) {
     displayButtons();
 
 });
+$(document).on("click", "gif", pauseOrPlay);
 
-//Need to add to stop and start//
-//ON click static should change to moving
-//var static= responsePlusData[i].images.fixed_height_still.url > var moving
-$(document).on("click", "<img>", function pauseOrPlay() {
-
-
-});
+function pauseOrPlay() {
+    var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+}
