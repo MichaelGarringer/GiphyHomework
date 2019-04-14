@@ -27,16 +27,21 @@ $(document).on("click", ".each-button", function (event) {
     }).done(function (response) {
         var responsePlusData = response.data
         for (var i = 0; i < responsePlusData.length; i++) {
-            var moving = responsePlusData[i].images.fixed_height.url;
-            var static = responsePlusData[i].images.fixed_height_still.url;
-            $("#gifDiv").prepend("Rating: " + responsePlusData[i].rating + "<img src='" + static + "'>");
-            var image = $("<img>");
-            image.attr("src", static);
-            image.addClass("gif");
-            image.attr("data-state", "still");
-            image.attr("data-still", static);
-            image.attr("data-animate", moving);
-            ;
+            
+            var newDiv = $("<div>")
+            var rating = responsePlusData.rating
+        	var moving = responsePlusData[i].images.fixed_height.url;
+        	var static = responsePlusData[i].images.fixed_height_still.url;
+        	var imageTag = $("<img>");
+        	imageTag.attr("src", static);
+        	imageTag.addClass("gifAnimation");
+        	imageTag.attr("data-state", "still");
+        	imageTag.attr("data-still",static );
+        	imageTag.attr("data-animate", moving);
+        
+            newDiv.append("Rating: " + rating)
+            newDiv.append(imageTag);
+        	$("#gifDiv").prepend(newDiv);
         }
     });
 });
@@ -50,14 +55,14 @@ $("#search").on("submit", function (event) {
     displayButtons();
 
 });
-$(document).on("click", "gif", pauseOrPlay);
+$(document).on("click", ".gifAnimation", pauseOrPlay);
 
 function pauseOrPlay() {
     var state = $(this).attr("data-state");
-      if (state === "still") {
+    if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
-      } else {
+    } else {
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
     }
